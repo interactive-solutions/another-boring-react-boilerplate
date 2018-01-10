@@ -1,0 +1,24 @@
+.button {
+  background: $primaryColor;
+  color: #fff;
+  border: none;
+  border-radius: $defaultBorderRadius;
+  padding: 10px 25px;
+  @include font-size(14);
+  cursor: pointer;
+  transition: all, 0.2s;
+
+  &:hover {
+    background: darken($primaryColor, 3%);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:active {
+    background: darken($primaryColor, 10%);
+    box-shadow: none;
+  }
+}

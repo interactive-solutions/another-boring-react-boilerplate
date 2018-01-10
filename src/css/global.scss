@@ -1,0 +1,97 @@
+/* *******************************************************************************************
+  Put styles that should be global and not component-specific in this file.
+  Global styles will be imported in the app's entry file are available to use with the className prop.
+  Variables defined in the /resources directory will be loaded at build-time, and are available to
+  use in all components without importing anything.
+******************************************************************************************** */
+
+@import 'partials/normalize';
+
+:global {
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    line-height: 1.3em;
+  }
+
+  body {
+    background: $bgColor;
+    color: $textColor;
+    font-family: $defaultFontFamily;
+    @include font-size($fontSize);
+    font-weight: $fontWeight;
+  }
+
+  a {
+    color: $primaryColor;
+  }
+
+  h1 {
+    @include font-size(34);
+    font-weight: 200;
+    line-height: 1.2em;
+    margin-bottom: 1em;
+    color: $primaryColor;
+  }
+
+  h1::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    margin-top: 8px;
+    background: $primaryColor;
+  }
+
+  h3 {
+    @include font-size($fontSize);
+    font-weight: 400;
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 2em 0;
+  }
+
+  ul {
+    margin-bottom: 2em;
+  }
+
+  li {
+    margin-bottom: 0.5em;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 50px 30px;
+  }
+
+  .line {
+    text-decoration: line-through;
+  }
+
+  .footer {
+    color: #999;
+    @include font-size(12);
+  }
+
+  .nav {
+    list-style-type: none;
+    margin: 0 0 2em 0;
+    padding: 0;
+  }
+
+  .nav li {
+    display: inline;
+    margin-right: 2em;
+  }
+
+  .nav li a:not(.active) {
+    color: #bbb;
+  }
+}

@@ -1,0 +1,5 @@
+/* Returns px and rem value from a px value */
+@mixin font-size($sizeValue: 16) {
+  font-size: $sizeValue + px;
+  font-size: $sizeValue / 10 + rem;
+}

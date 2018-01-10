@@ -1,0 +1,33 @@
+{
+  "presets": ["@babel/env", "@babel/react", "@babel/flow", "@babel/preset-stage-0"],
+  "plugins": [
+    [
+      "react-css-modules",
+      {
+        "generateScopedName": "_[hash:base64:5]",
+        "exclude": "node_modules",
+        "filetypes": {
+          ".scss": {}
+        }
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        [
+          "react-css-modules",
+          {
+            "generateScopedName": "[local]",
+            "exclude": "node_modules",
+            "filetypes": {
+              ".scss": {}
+            }
+          }
+        ],
+        "transform-es2015-modules-commonjs",
+        "dynamic-import-node"
+      ]
+    }
+  }
+}
