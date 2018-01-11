@@ -4,14 +4,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
-const pkg = require('../package.json');
 
 const projectRoot = path.resolve(__dirname, '..'); // Project root
 
 module.exports = {
   entry: {
     main: './src/index.js',
-    vendor: Object.keys(pkg.dependencies), // Put dependencies in vendor bundle
   },
   output: {
     path: path.resolve(projectRoot, 'dist'),
@@ -81,7 +79,12 @@ module.exports = {
       minChunks: 2,
     }),
     // Bundle vendor libraries
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks(module) {
+        return module.context && module.context.indexOf('node_modules') >= 0;
+      },
+    }),
     // Extract manifest
     new webpack.optimize.CommonsChunkPlugin({ name: 'manifest', minChunks: Infinity }),
   ],
