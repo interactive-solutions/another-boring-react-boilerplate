@@ -7,7 +7,7 @@ Anyway, I realized most of my projects end up with a very similar set up, and I 
 ## A couple of included features
 
 * Decent webpack configs for dev and prod.
-* Redux with redux-axios-middleware.
+* Redux and RxJs (redux-loadable).
 * CSS modules with SASS, autoprefixer, and global support.
 * React-router for navigation.
 * Code splitting: vendor, manifest and route based with react-loadable.

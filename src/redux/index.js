@@ -1,17 +1,20 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
-import axios from 'axios';
-import axiosMiddleware from 'redux-axios-middleware';
-import items from './Items';
+import { combineEpics, createEpicMiddleware } from 'redux-observable';
+import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/switchMap';
+
+import items, { itemEpics } from './Items';
+
+// Combine all epics
+const rootEpic = combineEpics(itemEpics);
 
 // Combine all reducers
-const reducers = combineReducers({ items });
+const rootReducer = combineReducers({ items });
 
 // Create axios client for redux-axios-middleware
-const client = axios.create({
-  baseUrl: 'http://localhost:8080/api',
-  responseType: 'json',
-});
 
-const store = createStore(reducers, applyMiddleware(axiosMiddleware(client)));
+const store = createStore(rootReducer, applyMiddleware(createEpicMiddleware(rootEpic)));
 
 export default store;

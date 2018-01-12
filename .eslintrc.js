@@ -6,7 +6,9 @@ module.exports = {
     jest: true,
   },
   rules: {
+    'arrow-parens': 0, // Prettier messes this one up
     'import/no-extraneous-dependencies': [2, { devDependencies: true }],
+    'function-paren-newline': 0,
     'react/prop-types': 0, // We are using flow instead
     'react/jsx-filename-extension': 0, // Prefer .js
     'react/prefer-stateless-function': 1, // Just warn

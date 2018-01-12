@@ -21,14 +21,14 @@ class Third extends Component<any> {
 
         <p>
           This page is connected to the redux store, and the data below is loaded on mount from
-          jsonplaceholder.typicode.com/posts using axios and redux-axios-middleware.
+          jsonplaceholder.typicode.com/posts using RxJs/redux-loadable.
         </p>
 
         <hr />
 
         {this.props.items.isLoading ? 'Loading...' : ''}
 
-        {this.props.items.items.map(item => <Item item={item} key={item.id} />)}
+        {this.props.items.items.slice(0, 10).map(item => <Item item={item} key={item.id} />)}
       </Fragment>
     );
   }
