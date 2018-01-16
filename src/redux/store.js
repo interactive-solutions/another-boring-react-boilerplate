@@ -1,21 +1,27 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
+import { routerReducer, routerMiddleware } from 'react-router-redux';
+
+// Rxjs operators
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/switchMap';
 
+import history from '../utils/history';
+
+// Import ducks
 import items, { itemEpics } from './Items';
 
 // Combine all epics
 const rootEpic = combineEpics(itemEpics);
 
 // Combine all reducers
-const rootReducer = combineReducers({ items });
+const rootReducer = combineReducers({ items, router: routerReducer });
 
 // Create middlewares
-const middlewares = [createEpicMiddleware(rootEpic)];
+const middlewares = [routerMiddleware(history), createEpicMiddleware(rootEpic)];
 
 // Add redux-logger in non-production builds
 if (process.env.NODE_ENV !== 'production') {

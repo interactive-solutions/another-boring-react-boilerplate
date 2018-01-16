@@ -1,10 +1,12 @@
 // @flow
 import React from 'react';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
+import history from '../../utils/history';
 import Routes from '../../routes';
 
 const App = () => (
-  <Router>
+  <ConnectedRouter history={history}>
     <div className="container">
       <h1>Another Boring React Boilerplate</h1>
 
@@ -32,7 +34,7 @@ const App = () => (
         &copy; 2018 Donald Trump | <a href="https://github.com/jarnell">github.com/jarnell</a>
       </p>
     </div>
-  </Router>
+  </ConnectedRouter>
 );
 
 export default App;

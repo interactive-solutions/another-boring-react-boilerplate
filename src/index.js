@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 // Make sure this is imported above App, so the global styles end up first in the build
 import './css/global.scss';
 
-import store from './redux';
+import store from './redux/store';
 import App from './components/App';
 
 // Add service worker in production
