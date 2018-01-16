@@ -19,7 +19,7 @@ type State = {
 
 type Action = {
   type: string,
-  payload?: any,
+  payload?: Array<Item>,
 };
 
 /* ******************************************************************
@@ -54,7 +54,8 @@ export const loadItems = (): Action => ({ type: LOAD_ITEMS });
 /* ******************************************************************
     Epics
 ****************************************************************** */
-const loadItemsEpic = (action$): Action =>
+// $FlowFixMe
+const loadItemsEpic = action$ =>
   action$
     .ofType(LOAD_ITEMS)
     .delay(1000)

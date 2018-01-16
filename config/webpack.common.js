@@ -9,7 +9,7 @@ const projectRoot = path.resolve(__dirname, '..'); // Project root
 
 module.exports = {
   entry: {
-    main: './src/index.js',
+    main: './src/main.js',
   },
   output: {
     path: path.resolve(projectRoot, 'dist'),

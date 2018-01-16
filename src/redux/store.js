@@ -12,19 +12,19 @@ import 'rxjs/add/operator/switchMap';
 import history from '../utils/history';
 
 // Import ducks
-import items, { itemEpics } from './Items';
+import { reducers, epics } from './';
 
 // Combine all epics
-const rootEpic = combineEpics(itemEpics);
+const rootEpic = combineEpics(...Object.values(epics));
 
 // Combine all reducers
-const rootReducer = combineReducers({ items, router: routerReducer });
+const rootReducer = combineReducers({ ...reducers, router: routerReducer });
 
 // Create middlewares
 const middlewares = [routerMiddleware(history), createEpicMiddleware(rootEpic)];
 
 // Add redux-logger in non-production builds
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
   const { logger } = require('redux-logger'); // eslint-disable-line
   middlewares.push(logger);
 }
