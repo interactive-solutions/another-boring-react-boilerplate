@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
@@ -58,6 +57,16 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.(jpg|png|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 5000,
+            name: './images/[hash].[ext]',
+          },
+        },
+      },
     ],
   },
   plugins: [
@@ -65,7 +74,6 @@ module.exports = {
       // Create a html with the build files from template
       template: './src/index.html',
     }),
-    new CopyWebpackPlugin([{ from: './src/assets', to: '../' }]), // Copy static resources to build directory
     // Extract loaded CSS and save to a file
     new ExtractTextWebpackPlugin({
       filename: 'style-[contenthash:20].css',

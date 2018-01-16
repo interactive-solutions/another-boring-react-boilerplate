@@ -1,6 +1,7 @@
 // @flow
 import React, { Fragment } from 'react';
 import Button from '../components/Button';
+import image from '../assets/images/example.png';
 
 const First = () => (
   <Fragment>
@@ -17,6 +18,8 @@ const First = () => (
       If you are looking for a more general, well-written starter kit, you probably should have a
       look at <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>.
     </p>
+
+    <img src={image} alt="Test" style={{ width: '100px' }} />
 
     <hr />
 
