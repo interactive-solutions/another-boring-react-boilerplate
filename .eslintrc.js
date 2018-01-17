@@ -21,10 +21,11 @@ module.exports = {
       },
     ],
   },
-  // Add enzymes shallow, render, mount to be valid global vars
+  // Add enzymes shallow, render, mount, Raven to be valid global vars
   globals: {
     shallow: true,
     render: true,
     mount: true,
+    Raven: true,
   },
 };

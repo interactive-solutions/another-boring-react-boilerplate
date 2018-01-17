@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
+const SentryWebpackPlugin = require('@sentry/webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { BannerPlugin } = require('webpack');
 
@@ -20,8 +21,13 @@ module.exports = merge(common, {
     publicPath: '/static/build/',
   },
   plugins: [
+    new SentryWebpackPlugin({
+      release: process.env.SENTRY_BUILD ? process.env.SENTRY_BUILD : 'local',
+      include: './dist',
+      ignore: ['node_modules'],
+    }),
     // UglifyJS
-    new UglifyJsWebpackPlugin(),
+    new UglifyJsWebpackPlugin({ sourceMap: true }),
     // Add header text to all js files
     new BannerPlugin(`© 2017 - ${new Date().getFullYear()}, ALL RIGHTS RESERVED ([hash])`),
     // Clean /dist onStart and move index.html to root onEnd

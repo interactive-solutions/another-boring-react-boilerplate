@@ -1,5 +1,5 @@
 // @flow
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { service as ItemService, entity as Item } from '../api/item';
 
 /* ******************************************************************
@@ -60,7 +60,7 @@ const loadItemsEpic = action$ =>
     .ofType(LOAD_ITEMS)
     .delay(1000)
     .switchMap(() =>
-      Observable.from(ItemService.getItems())
+      Observable.fromPromise(ItemService.getItems())
         .map(response => {
           const items = response.map(item => new Item(item.id, item.title, item.body));
           return { type: LOAD_ITEMS_SUCCESS, payload: items };

@@ -2,17 +2,20 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const DotenvWebpackPlugin = require('dotenv-webpack');
 const autoprefixer = require('autoprefixer');
 
 const projectRoot = path.resolve(__dirname, '..'); // Project root
 
 module.exports = {
+  devtool: 'source-map',
   entry: {
     main: './src/main.js',
   },
   output: {
     path: path.resolve(projectRoot, 'dist'),
     filename: '[name].js',
+    sourceMapFilename: '[file].map',
     chunkFilename: '[name].js',
     publicPath: '/',
   },
@@ -30,11 +33,13 @@ module.exports = {
               options: {
                 modules: true,
                 localIdentName: '_[hash:base64:5]',
+                sourceMap: true,
               },
             },
             {
               loader: 'postcss-loader', // Used to add autoprefixes
               options: {
+                sourceMap: true,
                 plugins: () =>
                   autoprefixer({
                     browsers: ['last 5 versions'],
@@ -46,6 +51,7 @@ module.exports = {
               loader: 'sass-resources-loader', // Used to inject SCSS variables, thus making them "global"
               options: {
                 resources: './src/css/resources/_*.scss',
+                sourceMap: true,
               },
             },
           ],
@@ -79,6 +85,7 @@ module.exports = {
       filename: 'style-[contenthash:20].css',
       allChunks: true,
     }),
+    new DotenvWebpackPlugin(),
     new webpack.HashedModuleIdsPlugin(), // So vendor caching works correctly
     // Extract commonly used components to main bundle
     new webpack.optimize.CommonsChunkPlugin({
