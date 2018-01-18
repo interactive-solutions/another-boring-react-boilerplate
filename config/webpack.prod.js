@@ -48,7 +48,7 @@ module.exports = merge(common, {
       // Remove local path prefixes
       stripPrefix: `${process.cwd()}/dist`,
       // Ignore index.html
-      staticFileGlobsIgnorePatterns: [/build\/index\.html$/],
+      staticFileGlobsIgnorePatterns: [/build\/index\.html$/, /\.map$/],
       // Do not cache bust files with chunkhash
       dontCacheBustUrlsMatching: /-\w{20}/,
     }),
