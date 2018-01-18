@@ -6,6 +6,7 @@ module.exports = {
     jest: true,
   },
   rules: {
+    'class-methods-use-this': 0, //
     'arrow-parens': 0, // Prettier messes this one up
     'import/no-extraneous-dependencies': [2, { devDependencies: true }],
     'function-paren-newline': 0,
@@ -26,6 +27,5 @@ module.exports = {
     shallow: true,
     render: true,
     mount: true,
-    Raven: true,
   },
 };

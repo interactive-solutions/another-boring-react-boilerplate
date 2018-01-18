@@ -1,5 +1,6 @@
 // @flow
 import React, { Component, Fragment } from 'react';
+import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 
 import { loadItems } from '../redux/Items';
@@ -17,6 +18,10 @@ class Third extends Component<any> {
   render() {
     return (
       <Fragment>
+        <Helmet>
+          <title>Third</title>
+        </Helmet>
+
         <p>This is the third page...</p>
 
         <p>

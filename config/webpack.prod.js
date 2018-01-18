@@ -12,6 +12,7 @@ const common = require('./webpack.common.js');
 const projectRoot = path.resolve(__dirname, '..');
 
 module.exports = merge(common, {
+  devtool: 'source-map', // Add source maps
   output: {
     // Add chunkhash to file names in prod
     filename: '[name]-[chunkhash].js',
@@ -58,4 +59,9 @@ module.exports = merge(common, {
       openAnalyzer: false,
     }),
   ],
+  performance: {
+    hints: 'error',
+    maxAssetSize: 300000,
+    maxEntrypointSize: 350000,
+  },
 });

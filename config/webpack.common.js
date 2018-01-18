@@ -7,10 +7,11 @@ const autoprefixer = require('autoprefixer');
 
 const projectRoot = path.resolve(__dirname, '..'); // Project root
 
+const isHot = process.argv.indexOf('--hot') !== -1;
+
 module.exports = {
-  devtool: 'source-map',
   entry: {
-    main: './src/main.js',
+    main: ['./src/main.js'], // This is an array because we want to be able to add HMR in dev config
   },
   output: {
     path: path.resolve(projectRoot, 'dist'),
@@ -26,6 +27,7 @@ module.exports = {
         test: /\.s?css$/,
         exclude: /node_modules/,
         use: ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
           // Use ETWP to put CSS in its own file
           use: [
             {
@@ -84,6 +86,7 @@ module.exports = {
     new ExtractTextWebpackPlugin({
       filename: 'style-[contenthash:20].css',
       allChunks: true,
+      disable: isHot, // Disable and fallback to style-loader if HMR is enabled
     }),
     new DotenvWebpackPlugin(),
     new webpack.HashedModuleIdsPlugin(), // So vendor caching works correctly

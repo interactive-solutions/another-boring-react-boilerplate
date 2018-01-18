@@ -8,19 +8,17 @@ Anyway, I realized most of my projects end up with a very similar set up, and I 
 
 * Decent webpack configs for dev and prod.
 * Redux and RxJs (redux-loadable).
+* React-router-redux with Helmet for navigation.
 * CSS modules with SASS, autoprefixer, and global support.
-* React-router for navigation.
-* Code splitting: vendor, manifest and route based with react-loadable.
+* Sentry support with redux and sourcemaps in production builds.
+* Code splitting with react-loadable.
 * Service Worker to cache build files.
 * Babel & ESLint with Airbnb config.
 * Flow type checking.
 * Testing with Jest and Enzyme.
 * Webpack-dev-server for developing and serve to test builds.
+* Hot Module Reloading.
 * Bundle analyzer.
-
-## What is not included
-
-* HMR - not a fan.
 
 ## Installation
 
@@ -29,7 +27,7 @@ Anyway, I realized most of my projects end up with a very similar set up, and I 
 
 ## Available commands
 
-* `yarn start` - starts webpack dev server
+* `yarn start` - starts webpack dev server (use --hot for HMR)
 * `yarn build` - builds project to /dist
 * `yarn serve` - serves the /dist directory in order to test build locally
 * `yarn test` - runs test with Jest

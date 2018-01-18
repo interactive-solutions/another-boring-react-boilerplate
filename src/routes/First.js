@@ -28,21 +28,17 @@ const First = () => (
     <ul>
       <li>Decent webpack configs for dev and prod.</li>
       <li>Redux and RxJs (redux-loadable).</li>
+      <li>React-router-redux with Helmet for navigation.</li>
       <li>CSS modules with SASS, autoprefixer, and global support.</li>
-      <li>React-router for navigation.</li>
-      <li>Code splitting: vendor, manifest and route based with react-loadable.</li>
+      <li>Sentry support with redux and sourcemaps in production builds.</li>
+      <li>Code splitting with react-loadable.</li>
       <li>Service Worker to cache build files.</li>
       <li>Babel & ESLint with Airbnb config.</li>
       <li>Flow type checking.</li>
       <li>Testing with Jest and Enzyme.</li>
       <li>Webpack-dev-server for developing and serve to test builds.</li>
+      <li>Hot Module Reloading.</li>
       <li>Bundle analyzer.</li>
-    </ul>
-
-    <h3>What is not included</h3>
-
-    <ul>
-      <li>HMR - not a fan.</li>
     </ul>
 
     <h3>Example component</h3>

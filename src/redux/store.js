@@ -1,7 +1,8 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-
 import { routerReducer, routerMiddleware } from 'react-router-redux';
+import Raven from 'raven-js';
+import createRavenMiddleware from 'raven-for-redux';
 
 // Rxjs operators
 import 'rxjs/add/operator/delay';
@@ -23,6 +24,11 @@ const rootReducer = combineReducers({ ...reducers, router: routerReducer });
 
 // Create middlewares
 const middlewares = [routerMiddleware(history), createEpicMiddleware(rootEpic)];
+
+// Add Raven middleware in production
+if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
+  middlewares.push(createRavenMiddleware(Raven));
+}
 
 // Add redux-logger in non-production builds
 if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
