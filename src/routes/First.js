@@ -27,7 +27,7 @@ const First = () => (
 
     <ul>
       <li>Decent webpack configs for dev and prod.</li>
-      <li>Redux and RxJs (redux-loadable).</li>
+      <li>Redux, Reselect and RxJs (redux-loadable).</li>
       <li>React-router-redux with Helmet for navigation.</li>
       <li>CSS modules with SASS, autoprefixer, and global support.</li>
       <li>Sentry support with redux and sourcemaps in production builds.</li>

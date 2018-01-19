@@ -7,7 +7,7 @@ Anyway, I realized most of my projects end up with a very similar set up, and I 
 ## A couple of included features
 
 * Decent webpack configs for dev and prod.
-* Redux and RxJs (redux-loadable).
+* Redux, Reselect and RxJs (redux-loadable).
 * React-router-redux with Helmet for navigation.
 * CSS modules with SASS, autoprefixer, and global support.
 * Sentry support with redux and sourcemaps in production builds.

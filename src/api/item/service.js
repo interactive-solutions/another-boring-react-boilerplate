@@ -6,7 +6,7 @@ class ItemService {
     return axios
       .get('https://jsonplaceholder.typicode.com/posts')
       .then(response =>
-        response.data.slice(0, 10).map(item => new ItemEntity(item.id, item.title, item.body)),
+        response.data.slice(0, 20).map(item => new ItemEntity(item.id, item.title, item.body)),
       );
   }
 }

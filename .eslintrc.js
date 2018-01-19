@@ -9,6 +9,8 @@ module.exports = {
     'no-underscore-dangle': 0,
     'class-methods-use-this': 0, //
     'arrow-parens': 0, // Prettier messes this one up
+    'no-plusplus': 0,
+    'no-use-before-define': 0,
     'import/no-extraneous-dependencies': [2, { devDependencies: true }],
     'function-paren-newline': 0,
     'react/prop-types': 0, // We are using flow instead

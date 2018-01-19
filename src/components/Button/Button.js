@@ -6,13 +6,16 @@ import './Button.scss';
 type Props = {
   text?: string,
   alertText?: string,
+  onClick?: ?() => mixed,
 };
 
 const Button = (props: Props) => (
   <button
     styleName="button"
     onClick={() => {
-      if (props.alertText) {
+      if (props.onClick) {
+        props.onClick();
+      } else if (props.alertText) {
         alert(props.alertText); // eslint-disable-line
       }
     }}
@@ -24,6 +27,7 @@ const Button = (props: Props) => (
 Button.defaultProps = {
   text: 'Button',
   alertText: '',
+  onClick: null,
 };
 
 export default Button;
