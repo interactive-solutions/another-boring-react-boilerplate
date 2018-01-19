@@ -1,6 +1,7 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { reducer as formReducer } from 'redux-form';
 import Raven from 'raven-js';
 import createRavenMiddleware from 'raven-for-redux';
 
@@ -20,7 +21,7 @@ import { reducers, epics } from './';
 const rootEpic = combineEpics(...Object.values(epics));
 
 // Combine all reducers
-const rootReducer = combineReducers({ ...reducers, router: routerReducer });
+const rootReducer = combineReducers({ ...reducers, router: routerReducer, form: formReducer });
 
 // Create middlewares
 const middlewares = [routerMiddleware(history), createEpicMiddleware(rootEpic)];
@@ -32,7 +33,20 @@ if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
 
 // Add redux-logger in non-production builds
 if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
-  const { logger } = require('redux-logger'); // eslint-disable-line
+  const { createLogger } = require('redux-logger'); // eslint-disable-line
+  const logger = createLogger({
+    collapsed: true,
+    // Suppress a few redux-form actions
+    predicate: (getState, action) =>
+      !(
+        action.type === '@@redux-form/CHANGE' ||
+        action.type === '@@redux-form/FOCUS' ||
+        action.type === '@@redux-form/BLUR' ||
+        action.type === '@@redux-form/REGISTER_FIELD' ||
+        action.type === '@@redux-form/DESTROY'
+      ),
+  });
+
   middlewares.push(logger);
 }
 

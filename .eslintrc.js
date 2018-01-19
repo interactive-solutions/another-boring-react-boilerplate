@@ -6,6 +6,7 @@ module.exports = {
     jest: true,
   },
   rules: {
+    'no-underscore-dangle': 0,
     'class-methods-use-this': 0, //
     'arrow-parens': 0, // Prettier messes this one up
     'import/no-extraneous-dependencies': [2, { devDependencies: true }],

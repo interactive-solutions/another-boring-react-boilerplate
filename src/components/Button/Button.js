@@ -12,7 +12,9 @@ const Button = (props: Props) => (
   <button
     styleName="button"
     onClick={() => {
-      alert(props.alertText); // eslint-disable-line
+      if (props.alertText) {
+        alert(props.alertText); // eslint-disable-line
+      }
     }}
   >
     {props.text}
@@ -21,7 +23,7 @@ const Button = (props: Props) => (
 
 Button.defaultProps = {
   text: 'Button',
-  alertText: 'I was clicked!',
+  alertText: '',
 };
 
 export default Button;

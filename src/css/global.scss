@@ -94,4 +94,14 @@
   .nav li a:not(.active) {
     color: #bbb;
   }
+
+  input {
+    @include font-size(16);
+    display: block;
+    margin: 0.5em 0 1em 0;
+    padding: 0.7em;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: $defaultBorderRadius;
+  }
 }
