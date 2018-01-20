@@ -4,6 +4,7 @@ const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const SentryWebpackPlugin = require('@sentry/webpack-plugin');
+const LodashWebpackPlugin = require('lodash-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { BannerPlugin } = require('webpack');
 
@@ -22,6 +23,7 @@ module.exports = merge(common, {
     publicPath: '/static/build/',
   },
   plugins: [
+    new LodashWebpackPlugin(),
     new SentryWebpackPlugin({
       release: process.env.SENTRY_BUILD ? process.env.SENTRY_BUILD : 'local',
       include: './dist',
@@ -61,7 +63,7 @@ module.exports = merge(common, {
   ],
   performance: {
     hints: 'error',
-    maxAssetSize: 300000,
-    maxEntrypointSize: 350000,
+    maxAssetSize: 400000,
+    maxEntrypointSize: 450000,
   },
 });
