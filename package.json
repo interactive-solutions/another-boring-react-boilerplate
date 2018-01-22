@@ -5,7 +5,7 @@
   "author": "Jakob Arnell, Interactive Solutions Bodama AB",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --config ./config/webpack.dev.js",
+    "start": "webpack-dev-server --env.NODE_ENV=dev --config ./config/webpack.dev.js",
     "build": "webpack -p --progress --config ./config/webpack.prod.js",
     "serve": "serve dist -s -p 8081",
     "test": "jest"
