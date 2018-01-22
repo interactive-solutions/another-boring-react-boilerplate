@@ -1,7 +1,7 @@
 // @flow
 import React, { Fragment } from 'react';
-import Button from '../components/Button';
-import image from '../assets/images/example.png';
+import Button from 'components/Button';
+import image from 'assets/images/example.png';
 
 const First = () => (
   <Fragment>

@@ -10,6 +10,9 @@ const projectRoot = path.resolve(__dirname, '..'); // Project root
 const isHot = process.argv.indexOf('--hot') !== -1;
 
 module.exports = {
+  resolve: {
+    modules: ['node_modules', 'src'],
+  },
   entry: {
     main: ['./src/main.js'], // This is an array because we want to be able to add HMR in dev config
   },

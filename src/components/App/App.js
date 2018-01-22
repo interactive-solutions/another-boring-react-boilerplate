@@ -4,8 +4,8 @@ import { Route, NavLink } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import { Helmet } from 'react-helmet';
 import Raven from 'raven-js';
-import history from '../../utils/history';
-import Routes from '../../routes';
+import history from 'utils/history';
+import Routes from 'routes';
 
 class App extends Component<{}> {
   componentDidCatch(error: Error, errorInfo: string) {
