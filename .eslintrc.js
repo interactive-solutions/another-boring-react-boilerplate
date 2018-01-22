@@ -25,7 +25,14 @@ module.exports = {
       },
     ],
   },
-  // Add enzymes shallow, render, mount, Raven to be valid global vars
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['src'],
+      },
+    },
+  },
+  // Add enzymes shallow, render, mount to be valid global vars
   globals: {
     shallow: true,
     render: true,
