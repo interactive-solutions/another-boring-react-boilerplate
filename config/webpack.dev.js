@@ -8,6 +8,7 @@ const config = merge(common, {
   devServer: {
     historyApiFallback: true,
     compress: true,
+    disableHostCheck: true,
   },
 });
 
