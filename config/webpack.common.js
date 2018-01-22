@@ -1,19 +1,22 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const DotenvWebpackPlugin = require('dotenv-webpack');
 const autoprefixer = require('autoprefixer');
 
 const projectRoot = path.resolve(__dirname, '..'); // Project root
 
+const isHot = process.argv.indexOf('--hot') !== -1;
+
 module.exports = {
   entry: {
-    main: './src/index.js',
+    main: ['./src/main.js'], // This is an array because we want to be able to add HMR in dev config
   },
   output: {
     path: path.resolve(projectRoot, 'dist'),
     filename: '[name].js',
+    sourceMapFilename: '[file].map',
     chunkFilename: '[name].js',
     publicPath: '/',
   },
@@ -24,6 +27,7 @@ module.exports = {
         test: /\.s?css$/,
         exclude: /node_modules/,
         use: ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
           // Use ETWP to put CSS in its own file
           use: [
             {
@@ -31,11 +35,13 @@ module.exports = {
               options: {
                 modules: true,
                 localIdentName: '_[hash:base64:5]',
+                sourceMap: true,
               },
             },
             {
               loader: 'postcss-loader', // Used to add autoprefixes
               options: {
+                sourceMap: true,
                 plugins: () =>
                   autoprefixer({
                     browsers: ['last 5 versions'],
@@ -47,6 +53,7 @@ module.exports = {
               loader: 'sass-resources-loader', // Used to inject SCSS variables, thus making them "global"
               options: {
                 resources: './src/css/resources/_*.scss',
+                sourceMap: true,
               },
             },
           ],
@@ -58,6 +65,16 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.(jpg|png|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 5000,
+            name: './images/[hash].[ext]',
+          },
+        },
+      },
     ],
   },
   plugins: [
@@ -65,12 +82,13 @@ module.exports = {
       // Create a html with the build files from template
       template: './src/index.html',
     }),
-    new CopyWebpackPlugin([{ from: './src/assets', to: '../' }]), // Copy static resources to build directory
     // Extract loaded CSS and save to a file
     new ExtractTextWebpackPlugin({
       filename: 'style-[contenthash:20].css',
       allChunks: true,
+      disable: isHot, // Disable and fallback to style-loader if HMR is enabled
     }),
+    new DotenvWebpackPlugin(),
     new webpack.HashedModuleIdsPlugin(), // So vendor caching works correctly
     // Extract commonly used components to main bundle
     new webpack.optimize.CommonsChunkPlugin({

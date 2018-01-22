@@ -16,10 +16,10 @@ describe('Button', () => {
     expect(button.text()).toBe('I am a button');
   });
 
-  it('should handle the click event and alert the default text', () => {
+  it('should not alert anything if alertText prop is not provided', () => {
     window.alert = jest.fn();
     button.simulate('click');
-    expect(window.alert).toHaveBeenCalledWith('I was clicked!');
+    expect(window.alert).not.toHaveBeenCalled();
   });
 
   it('should display custom alert text if alertText prop is provided', () => {

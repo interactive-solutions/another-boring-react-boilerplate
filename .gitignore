@@ -1,5 +1,7 @@
 node_modules
 dist
 coverage
+.env
 report.html
 .DS_Store
+*.log

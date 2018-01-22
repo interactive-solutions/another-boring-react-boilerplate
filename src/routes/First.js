@@ -1,6 +1,7 @@
 // @flow
 import React, { Fragment } from 'react';
 import Button from '../components/Button';
+import image from '../assets/images/example.png';
 
 const First = () => (
   <Fragment>
@@ -18,28 +19,26 @@ const First = () => (
       look at <a href="https://github.com/facebookincubator/create-react-app">create-react-app</a>.
     </p>
 
+    <img src={image} alt="Test" style={{ width: '100px' }} />
+
     <hr />
 
     <h3>A couple of included features</h3>
 
     <ul>
       <li>Decent webpack configs for dev and prod.</li>
-      <li>Redux with redux-axios-middleware.</li>
+      <li>Redux, Reselect and RxJs (redux-loadable).</li>
+      <li>React-router-redux with Helmet for navigation.</li>
       <li>CSS modules with SASS, autoprefixer, and global support.</li>
-      <li>React-router for navigation.</li>
-      <li>Code splitting: vendor, manifest and route based with react-loadable.</li>
+      <li>Sentry support with redux and sourcemaps in production builds.</li>
+      <li>Code splitting with react-loadable.</li>
       <li>Service Worker to cache build files.</li>
       <li>Babel & ESLint with Airbnb config.</li>
       <li>Flow type checking.</li>
       <li>Testing with Jest and Enzyme.</li>
       <li>Webpack-dev-server for developing and serve to test builds.</li>
+      <li>Hot Module Reloading.</li>
       <li>Bundle analyzer.</li>
-    </ul>
-
-    <h3>What is not included</h3>
-
-    <ul>
-      <li>HMR - not a fan.</li>
     </ul>
 
     <h3>Example component</h3>
