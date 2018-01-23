@@ -83,7 +83,8 @@
   "jest": {
     "moduleDirectories": ["node_modules", "src"],
     "moduleNameMapper": {
-      "^.+\\.(css|scss)$": "identity-obj-proxy"
+      "\\.(jpg|jpeg|png|svg)$": "<rootDir>/config/jestFileMock.js",
+      "\\.(css|scss)$": "identity-obj-proxy"
     },
     "setupFiles": ["./config/tests.js"],
     "snapshotSerializers": ["enzyme-to-json/serializer"]
