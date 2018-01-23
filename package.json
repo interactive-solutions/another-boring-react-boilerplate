@@ -8,7 +8,8 @@
     "start": "webpack-dev-server --env.NODE_ENV=dev --config ./config/webpack.dev.js",
     "build": "webpack -p --progress --config ./config/webpack.prod.js",
     "serve": "serve dist -s -p 8081",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint src --ext .js"
   },
   "dependencies": {
     "axios": "^0.17.1",
