@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 const DotenvWebpackPlugin = require('dotenv-webpack');
+const LodashWebpackPlugin = require('lodash-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 const projectRoot = path.resolve(__dirname, '..'); // Project root
@@ -108,6 +109,7 @@ module.exports = {
     }),
     // Extract manifest
     new webpack.optimize.CommonsChunkPlugin({ name: 'manifest', minChunks: Infinity }),
+    new LodashWebpackPlugin(),
   ],
   node: {
     fs: 'empty',
