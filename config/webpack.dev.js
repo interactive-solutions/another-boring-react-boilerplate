@@ -5,6 +5,7 @@ const common = require('./webpack.common.js');
 const isHot = process.argv.indexOf('--hot') !== -1;
 
 const config = merge(common, {
+  mode: 'development',
   devServer: {
     historyApiFallback: true,
     compress: true,
