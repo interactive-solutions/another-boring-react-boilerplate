@@ -37,5 +37,8 @@ module.exports = {
     shallow: true,
     render: true,
     mount: true,
+    __PROD__: true,
+    __DEV__: true,
+    __TEST__: true,
   },
 };
