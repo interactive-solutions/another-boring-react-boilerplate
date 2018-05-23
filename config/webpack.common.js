@@ -10,6 +10,12 @@ const projectRoot = path.resolve(__dirname, '..'); // Project root
 
 const isHot = process.argv.indexOf('--hot') !== -1;
 
+// Define env vars
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const __DEV__ = NODE_ENV === 'development';
+const __TEST__ = NODE_ENV === 'test';
+const __PROD__ = NODE_ENV === 'production';
+
 module.exports = {
   resolve: {
     modules: ['node_modules', 'src'],
@@ -126,6 +132,12 @@ module.exports = {
     }),
     new DotenvWebpackPlugin(),
     new webpack.HashedModuleIdsPlugin(), // So vendor caching works correctly
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
+      __DEV__,
+      __TEST__,
+      __PROD__,
+    }),
     new LodashWebpackPlugin(),
   ],
   node: {
