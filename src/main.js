@@ -11,7 +11,7 @@ import store from './redux/store';
 import App from './components/App';
 
 // Install Raven in production
-if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
+if (__PROD__ && process.env.SENTRY_DSN) {
   Raven.config(process.env.SENTRY_DSN, {
     release: process.env.SENTRY_BUILD ? process.env.SENTRY_BUILD : 'local',
     environment: process.env.SENTRY_ENV ? process.env.SENTRY_ENV : 'dev',
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
 }
 
 // Add service worker in production
-if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+if (__PROD__ && 'serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js');
 }
 

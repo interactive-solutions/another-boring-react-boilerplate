@@ -10,7 +10,7 @@ import Routes from 'routes';
 class App extends Component<{}> {
   componentDidCatch(error: Error, errorInfo: string) {
     // Catch error and send to Sentry in production
-    if (process.env.NODE_ENV === 'production' && process.env.SENTRY_DSN) {
+    if (__PROD__ && process.env.SENTRY_DSN) {
       Raven.captureException(error, { extra: errorInfo });
     }
   }

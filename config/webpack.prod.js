@@ -6,12 +6,13 @@ const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const SentryWebpackPlugin = require('@sentry/webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+require('dotenv').config();
 
 const common = require('./webpack.common.js');
 
 const projectRoot = path.resolve(__dirname, '..');
 
-module.exports = merge(common, {
+const config = merge(common, {
   mode: 'production',
   devtool: 'source-map', // Add source maps
   output: {
@@ -51,11 +52,6 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
-    new SentryWebpackPlugin({
-      release: process.env.SENTRY_BUILD ? process.env.SENTRY_BUILD : 'local',
-      include: './dist',
-      ignore: ['node_modules'],
-    }),
     // Clean /dist onStart and move index.html to root onEnd
     new FileManagerPlugin({
       onStart: {
@@ -90,3 +86,16 @@ module.exports = merge(common, {
     maxEntrypointSize: 1000000,
   },
 });
+
+// Add sentry plugin if there is an SENTRY_DSN env var
+if (process.env.SENTRY_DSN) {
+  config.plugins.push(
+    new SentryWebpackPlugin({
+      release: process.env.SENTRY_BUILD ? process.env.SENTRY_BUILD : 'local',
+      include: './dist',
+      ignore: ['node_modules'],
+    }),
+  );
+}
+
+module.exports = config;

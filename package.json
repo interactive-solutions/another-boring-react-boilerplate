@@ -5,8 +5,8 @@
   "author": "Jakob Arnell, Interactive Solutions Bodama AB",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --env.NODE_ENV=development --config ./config/webpack.dev.js",
-    "build": "webpack --env.NODE_ENV=production --config ./config/webpack.prod.js",
+    "start": "NODE_ENV=development webpack-dev-server --config ./config/webpack.dev.js",
+    "build": "NODE_ENV=production webpack --config ./config/webpack.prod.js",
     "serve": "serve dist -s -p 8081",
     "test": "jest",
     "lint": "eslint src --ext .js"
@@ -46,6 +46,7 @@
     "babel-plugin-react-css-modules": "^3.3.2",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "css-loader": "^0.28.8",
+    "dotenv": "^5.0.1",
     "dotenv-webpack": "^1.5.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
