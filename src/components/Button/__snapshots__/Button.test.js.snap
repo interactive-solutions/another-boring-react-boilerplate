@@ -4,6 +4,7 @@ exports[`Button should render correctly 1`] = `
 <button
   className="button"
   onClick={[Function]}
+  type="button"
 >
   I am a button
 </button>

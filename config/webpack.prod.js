@@ -1,17 +1,19 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const merge = require('webpack-merge');
-const UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 const SentryWebpackPlugin = require('@sentry/webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { BannerPlugin } = require('webpack');
+require('dotenv').config();
 
 const common = require('./webpack.common.js');
 
 const projectRoot = path.resolve(__dirname, '..');
 
-module.exports = merge(common, {
+const config = merge(common, {
+  mode: 'production',
   devtool: 'source-map', // Add source maps
   output: {
     // Add chunkhash to file names in prod
@@ -21,16 +23,35 @@ module.exports = merge(common, {
     path: path.resolve(projectRoot, 'dist', 'static', 'build'),
     publicPath: '/static/build/',
   },
+  optimization: {
+    minimizer: [
+      new UglifyJsPlugin({
+        uglifyOptions: {
+          parse: {
+            ecma: 8,
+          },
+          compress: {
+            ecma: 5,
+            warnings: false,
+            comparisons: false,
+          },
+          mangle: {
+            safari10: true,
+          },
+          output: {
+            ecma: 5,
+            comments: false,
+            ascii_only: true,
+          },
+        },
+        parallel: true,
+        cache: true,
+        sourceMap: true,
+      }),
+      new OptimizeCssAssetsPlugin(),
+    ],
+  },
   plugins: [
-    new SentryWebpackPlugin({
-      release: process.env.SENTRY_BUILD ? process.env.SENTRY_BUILD : 'local',
-      include: './dist',
-      ignore: ['node_modules'],
-    }),
-    // UglifyJS
-    new UglifyJsWebpackPlugin({ sourceMap: true }),
-    // Add header text to all js files
-    new BannerPlugin(`© 2017 - ${new Date().getFullYear()}, ALL RIGHTS RESERVED ([hash])`),
     // Clean /dist onStart and move index.html to root onEnd
     new FileManagerPlugin({
       onStart: {
@@ -60,8 +81,21 @@ module.exports = merge(common, {
     }),
   ],
   performance: {
-    hints: 'error',
-    maxAssetSize: 400000,
-    maxEntrypointSize: 450000,
+    hints: 'warning',
+    maxAssetSize: 1000000,
+    maxEntrypointSize: 1000000,
   },
 });
+
+// Add sentry plugin if there is an SENTRY_DSN env var
+if (process.env.SENTRY_DSN) {
+  config.plugins.push(
+    new SentryWebpackPlugin({
+      release: process.env.SENTRY_BUILD ? process.env.SENTRY_BUILD : 'local',
+      include: './dist',
+      ignore: ['node_modules'],
+    }),
+  );
+}
+
+module.exports = config;
