@@ -24,6 +24,11 @@ module.exports = {
         specialLink: ['to'],
       },
     ],
+    'lines-between-class-members': [2, 'always', { exceptAfterSingleLine: true }],
+    'implicit-arrow-linebreak': 0,
+    'react/jsx-one-expression-per-line': 0,
+    'react/destructuring-assignment': 0,
+    'object-curly-newline': 0,
   },
   settings: {
     'import/resolver': {

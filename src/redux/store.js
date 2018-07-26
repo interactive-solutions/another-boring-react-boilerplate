@@ -20,7 +20,7 @@ import 'rxjs/add/observable/timer';
 import history from '../utils/history';
 
 // Import ducks
-import { reducers, epics } from './';
+import { reducers, epics } from '.';
 
 // Combine all epics
 const rootEpic = combineEpics(...Object.values(epics));
@@ -44,11 +44,11 @@ if (__DEV__) {
     // Suppress a few redux-form actions
     predicate: (getState, action) =>
       !(
-        action.type === '@@redux-form/CHANGE' ||
-        action.type === '@@redux-form/FOCUS' ||
-        action.type === '@@redux-form/BLUR' ||
-        action.type === '@@redux-form/REGISTER_FIELD' ||
-        action.type === '@@redux-form/DESTROY'
+        action.type === '@@redux-form/CHANGE'
+        || action.type === '@@redux-form/FOCUS'
+        || action.type === '@@redux-form/BLUR'
+        || action.type === '@@redux-form/REGISTER_FIELD'
+        || action.type === '@@redux-form/DESTROY'
       ),
   });
 

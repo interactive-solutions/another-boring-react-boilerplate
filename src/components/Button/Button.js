@@ -11,6 +11,7 @@ type Props = {
 
 const Button = (props: Props) => (
   <button
+    type="button"
     styleName="button"
     onClick={() => {
       if (props.onClick) {
